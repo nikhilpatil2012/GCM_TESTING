@@ -1,46 +1,37 @@
-package saviour.alpha.gcm;
+package quizzy10.view;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
+
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
-public class HttpConnect extends AsyncTask<String, String, String>{
+import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Bundle;
+
+public class MessageSender extends AsyncTask<String, Void, Void>{
 	
-	String value = null;
-	GoogleCloudMessaging gcm;
-	Context context;
-	String reg_id;
-	String Api_Key = "";
+	private Context context;
 	
-	public HttpConnect(Context context) {
-	  this.context = context;
+	public MessageSender(Context context) {
+		this.context = context;
 	}
 	
 	@Override
-	protected String doInBackground(String... params) {
-	
-		String Sender_Id = "126680928755";
-		
-		gcm = GoogleCloudMessaging.getInstance(context);
-		
+	protected Void doInBackground(String... params) {
+		GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(context);
 		try {
-		
-	 reg_id = gcm.register(Sender_Id);
-	
-			Log.w("GCMDemo_Reg_ID", reg_id);
-				
-		} catch (UnsupportedEncodingException e) {} 
-		  //catch (ClientProtocolException e) {} 
-		  catch (IOException e) {}
-		
-		return "";
+            Bundle data = new Bundle();
+                gcm.send(params[0] , params[1], data);
+                
+        } catch (IOException ex) { 
+            
+        } catch (Exception ex) {
+            
+        }
+		return null;
 	}
-	
-	
-
+	@Override
+	protected void onCancelled(Void result) {
+		
 	}
-	
-	
+}
