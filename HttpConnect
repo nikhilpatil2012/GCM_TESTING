@@ -23,7 +23,7 @@ public class MessageSender extends AsyncTask<String, Void, Void>{
             Bundle data = new Bundle();
                 gcm.send(params[0] , params[1], data);
                 
-        } catch (IOException ex) {
+        } catch (IOException ex) { 
             
         } catch (Exception ex) {
             
