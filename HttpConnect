@@ -1,0 +1,46 @@
+package saviour.alpha.gcm;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+
+public class HttpConnect extends AsyncTask<String, String, String>{
+	
+	String value = null;
+	GoogleCloudMessaging gcm;
+	Context context;
+	String reg_id;
+	String Api_Key = "";
+	
+	public HttpConnect(Context context) {
+	  this.context = context;
+	}
+	
+	@Override
+	protected String doInBackground(String... params) {
+	
+		String Sender_Id = "126680928755";
+		
+		gcm = GoogleCloudMessaging.getInstance(context);
+		
+		try {
+		
+	 reg_id = gcm.register(Sender_Id);
+	
+			Log.w("GCMDemo_Reg_ID", reg_id);
+				
+		} catch (UnsupportedEncodingException e) {} 
+		  //catch (ClientProtocolException e) {} 
+		  catch (IOException e) {}
+		
+		return "";
+	}
+	
+	
+
+	}
+	
+	
